@@ -1,21 +1,7 @@
 import React from 'react';
 
 class TurnoutCalc extends React.Component {
-  // // Midterm Voter Turnout Count (integer)
-  // const [midtermTurnout1, setMidTermTurnout1] = useState(0);
-  // const [midtermTurnout2, setMidTermTurnout2] = useState(0);
-  // const [midtermTurnout3, setMidTermTurnout3] = useState(0);
-  // //Midterm Total registered Voters
-  // const [totalVoters1, setTotalVoters1] = useState(0);
-  // const [totalVoters2, setTotalVoters2] = useState(0);
-  // const [totalVoters3, setTotalVoters3] = useState(0);
-  // //Midterm Voter Turnout Percentages
-  // const [voterTurnoutPercent1, setVoterTurnoutPercent1] = useState(0);
-  // const [voterTurnoutPercent2, setVoterTurnoutPercent2] = useState(0);
-  // const [voterTurnoutPercent3, setVoterTurnoutPercent3] = useState(0);
-  // //Midterm Turnout Average
-  // const [averageTurnout, setAverageTurnout] = useState(0);
-  //Set state for each input
+ 
   constructor() {
     super();
     this.state = {
@@ -30,18 +16,14 @@ class TurnoutCalc extends React.Component {
   }
 
   handleTurnout(e) {
-    // setMidTermTurnout1(e.target.value);
-    // console.log(midtermTurnout1);
     this.setState({ midtermTurnout1: parseInt(e.target.value) });
   }
   handleTurnout2(e) {
-    // setMidTermTurnout1(e.target.value);
-    // console.log(midtermTurnout1);
+    
     this.setState({ midtermTurnout2: parseInt(e.target.value) });
   }
   handleTurnout3(e) {
-    // setMidTermTurnout1(e.target.value);
-    // console.log(midtermTurnout1);
+
     this.setState({ midtermTurnout3: parseInt(e.target.value) });
   }
   handleVoters(e) {
