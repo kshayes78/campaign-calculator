@@ -5,7 +5,7 @@ import TurnoutCalc from './TurnoutCalc';
 function App() {
   return (
     <div className='App'>
-      <CalculateIcon />
+      <CalculateIcon className="calculator" />
       <h1>Campaign Calculators</h1>
       <TurnoutCalc />
     </div>

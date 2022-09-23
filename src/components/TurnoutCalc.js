@@ -1,4 +1,4 @@
-import React, { useState, setState } from 'react';
+import React from 'react';
 
 class TurnoutCalc extends React.Component {
   // // Midterm Voter Turnout Count (integer)
@@ -15,6 +15,7 @@ class TurnoutCalc extends React.Component {
   // const [voterTurnoutPercent3, setVoterTurnoutPercent3] = useState(0);
   // //Midterm Turnout Average
   // const [averageTurnout, setAverageTurnout] = useState(0);
+  //Set state for each input
   constructor() {
     super();
     this.state = {
@@ -56,14 +57,29 @@ class TurnoutCalc extends React.Component {
     this.setState({ currentRegVoters: parseInt(e.target.value) });
   }
 
+
+  //Calculate Turnout Percentage
   calculatePercentage(num, den) {
     if (!den) {
       return 0;
     }
     return (num / den) * 100;
   }
+  
+  //Calculate Projected Voter Turnout
   calculateTurnout(num1, num2) {
-    return num1 * num2;
+    return (num1 * num2) / 100;
+  }
+
+  //Calculate Vote Goal
+  calculateVoteGoal(num1) {
+    return num1 * 0.52;
+  }
+
+  calculateYearMinus12(){
+    const currentYear = new Date().getFullYear();
+    const currentYearMinus12 = currentYear-12
+    return currentYearMinus12
   }
 
   render() {
@@ -84,7 +100,7 @@ class TurnoutCalc extends React.Component {
           ></input>
           <br />
           <label htmlFor='regVoters'>
-            Please enter Total Registered Voter for 2010:
+            Please enter Total Registered Voters for 2010:
           </label>
           <input
             onChange={this.handleVoters.bind(this)}
@@ -108,7 +124,7 @@ class TurnoutCalc extends React.Component {
           ></input>
           <br />
           <label htmlFor='regVoters'>
-            Please enter Total Registered Voter for 2014:
+            Please enter Total Registered Voters for 2014:
           </label>
           <input
             onChange={this.handleVoters2.bind(this)}
@@ -132,7 +148,7 @@ class TurnoutCalc extends React.Component {
           ></input>
           <br />
           <label htmlFor='regVoters'>
-            Please enter Total Registered Voter for 2018:
+            Please enter Total Registered Voters for 2018:
           </label>
           <input
             onChange={this.handleVoters3.bind(this)}
@@ -144,7 +160,7 @@ class TurnoutCalc extends React.Component {
           ></input>
           <br />
           <label htmlFor='regVoters'>
-            Please enter Total Registered Voter for the Current Year:
+            Please enter Total Registered Voters for the Current Year:
           </label>
           <input
             onChange={this.handleCurrentVoters.bind(this)}
@@ -159,25 +175,25 @@ class TurnoutCalc extends React.Component {
             Your average turnout
             <br />
             For 2010 is{' '}
-            {this.calculatePercentage(
+            {Math.round(this.calculatePercentage(
               this.state.midtermTurnout1,
               this.state.totalVoters1
-            )}
+            ))}
             %. <br />
             For 2014 is{' '}
-            {this.calculatePercentage(
+            {Math.round(this.calculatePercentage(
               this.state.midtermTurnout2,
               this.state.totalVoters2
-            )}
+            ))}
             %. <br />
             For 2018 is{' '}
-            {this.calculatePercentage(
+            {Math.round(this.calculatePercentage(
               this.state.midtermTurnout3,
               this.state.totalVoters3
-            )}
+           ))}
             %.
             <br /> Your average turnout is{' '}
-            {this.calculatePercentage(
+            {Math.round(this.calculatePercentage(
               this.state.midtermTurnout1 +
                 this.state.midtermTurnout2 +
                 this.state.midtermTurnout3,
@@ -185,19 +201,24 @@ class TurnoutCalc extends React.Component {
               this.state.totalVoters1 +
                 this.state.totalVoters2 +
                 this.state.totalVoters3
-            )}
+            ))}
             %.
             <br />
-            {/* Your Projected Voter Turnout is{' '}
-            {this.calculateTurnout(
+            Your Projected Voter Turnout is{' '}
+            {Math.round(this.calculateTurnout(
               this.state.currentRegVoters,
-              (this.state.midtermTurnout1 +
-                this.state.midtermTurnout2 +
-                this.state.midtermTurnout3,
-              this.state.totalVoters1 +
-                this.state.totalVoters2 +
-                this.state.totalVoters3) * 100
-            )} */}
+              this.calculatePercentage(
+                this.state.midtermTurnout1 +
+                  this.state.midtermTurnout2 +
+                  this.state.midtermTurnout3,
+                this.state.totalVoters1 +
+                  this.state.totalVoters2 +
+                  this.state.totalVoters3
+              ))
+            ).toLocaleString('en-US')}
+            <br />
+            Your Vote Goal is{' '}
+            {Math.round(this.calculateVoteGoal(this.state.currentRegVoters)).toLocaleString('en-US')}
           </h2>
         </form>
       </div>
